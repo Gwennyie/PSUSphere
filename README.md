@@ -46,6 +46,7 @@ It allows administrators to manage student records and organization memberships 
 
 <p>We are 3rd Year Computer Science students from the Palawan State University (PalSU) that explores application development using Django and its virtual environment.
 
+ <div align ="center">
 <table>
     <tr>
     <td align = "center" width = "150">
@@ -90,4 +91,6 @@ It allows administrators to manage student records and organization memberships 
 </a> 
     </td>
     </tr>
+ 
 </table>
+</div>
