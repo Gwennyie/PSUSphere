@@ -46,8 +46,13 @@ class CollegeCreateView(CreateView):
     template_name = 'college_forms.html'
     success_url = reverse_lazy('college-list')
 
-class CollegeUpdateView (UpdateView):
+class CollegeUpdateView(UpdateView):
     model = College
     form_class = CollegeForm
     template_name = "college_forms.html"
+    success_url = reverse_lazy('college-list')
+
+class CollegeDeleteView(DeleteView):
+    model = College
+    template_name = "college_del.html"
     success_url = reverse_lazy('college-list')

@@ -49,7 +49,10 @@
                                 {% for object in object_list %}
                                 <tr>
                                     <td>{{ object.college_name }}</td>
-                                    <td><a href="{% url 'college-update' object.pk %}">Edit</a></td>
+                                    <td>
+                                        <a href="{% url 'college-update' object.pk %}">Edit</a>
+                                        <a href="{% url 'college-delete' object.pk %}" class="text-danger">Delete</a>
+                                    </td>
                                 </tr>
                                 {% empty %}
                                 <tr>
