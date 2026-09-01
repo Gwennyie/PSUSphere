@@ -28,7 +28,7 @@
                             <div class="col-md-6">
                                 <div class="pull-right">
                                     <a href="{% url 'program-add' %}" class="btn btn-success btn-rounded">Add
-                                        Organization</a>
+                                        Program</a>
                                 </div>
                             </div>
                         </div>
@@ -50,6 +50,7 @@
                                     <td>{{ object.college }}</td>
                                     <td>
                                         <a href="program_list/{{ object.id }}">Edit</a>
+                                        <a href="program_list/{{ object.id }}/delete" class="text-danger">Delete</a>
                                     </td>
                                 </tr>
                                 {% empty %}
