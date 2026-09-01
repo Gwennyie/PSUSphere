@@ -16,14 +16,39 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from studentorg.views import HomePageView, OrganizationList, OrganizationCreateView, OrganizationUpdateView, OrganizationDeleteView 
+from studentorg.views import (
+    HomePageView, 
+    OrganizationList, 
+    OrganizationCreateView, 
+    OrganizationUpdateView, 
+    OrganizationDeleteView,
+    OrgMemberList,
+    OrgMemberCreate,
+    OrgMemberUpdate,
+    OrgMemberDelete,
+    StudentList,
+    StudentCreate,
+    StudentUpdate,
+    StudentDelete
+)
 from studentorg import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.HomePageView.as_view(), name='home'),
+
     path('organizations/', views.OrganizationList.as_view(), name='organization-list'),
     path('organization_list/add', OrganizationCreateView.as_view(), name='organization-add'), 
     path('organization_list/<pk>', OrganizationUpdateView.as_view(), name='organization-update'), 
-    path('organization_list/<pk>/delete', OrganizationDeleteView.as_view(), name='organization-delete'), 
+    path('organization_list/<pk>/delete', OrganizationDeleteView.as_view(), name='organization-delete'),
+
+    path('orgmembers/', views.OrgMemberList.as_view(), name='orgmember-list'),
+    path('orgmembers_list/add', views.OrgMemberCreate.as_view(), name='orgmember-add'),
+    path('orgmembers_list/<pk>', views.OrgMemberUpdate.as_view(), name='orgmember-update'),
+    path('orgmembers/<pk>/delete/', views.OrgMemberDelete.as_view(), name='orgmember-delete'),
+
+    path('students/', views.StudentList.as_view(), name='student-list'),
+    path('students_list/add', views.StudentCreate.as_view(), name='student-add'),
+    path('students_list/<pk>', views.StudentUpdate.as_view(), name='student-update'),
+    path('students_list/<pk>/delete/', views.StudentDelete.as_view(), name='student-delete'),
 ]
