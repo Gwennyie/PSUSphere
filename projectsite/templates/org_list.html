@@ -18,20 +18,17 @@
                         <div class="col-md-6">
                         <form method="GET" action="{% url 'organization-list' %}" class="navbar-left navbar-form nav-search mr-md-3">
 
-                            <div class="input-group">
+                                <div class="input-group">
 
-                                <input type="text" name="search" placeholder="Search..." class="form-control" value="{{ request.GET.search }}" />
+                                    <input type="text" name="search" placeholder="Search..." class="form-control" value="{{ request.GET.search }}" />
 
-                                <div class="input-group-append">
+                                    <div class="input-group-append">
 
-                                    <button type="submit" class="input-group-text">
-                                        <i class="la la-search search-icon"></i>
-                                    </button>
-
+                                        <button type="submit" class="input-group-text">
+                                            <i class="la la-search search-icon"></i>
+                                        </button>
+                                    </div>
                                 </div>
-
-                            </div>
-
                         </form>
                         </div>
 
@@ -49,7 +46,7 @@
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">College</th>
-                                    <th scope="col">Description</th>
+                                    
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>

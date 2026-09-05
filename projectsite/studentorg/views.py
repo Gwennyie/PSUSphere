@@ -29,6 +29,10 @@ class HomePageView(ListView):
         ) 
  
         context["students_joined_this_year"] = count 
+
+        context["total_orgs"] = Organization.objects.count()
+        context["total_programs"] = Program.objects.count()
+        
         return context 
 
 class OrganizationList(ListView):
@@ -76,18 +80,29 @@ class OrgMemberList(ListView):
     template_name = "orgmember_list.html"
     paginate_by = 5
 
-    def get_queryset(self):  
+    def get_queryset(self):
+
         qs = OrgMember.objects.all()
-        query = self.request.GET.get('search') 
-     
-        if query: 
-            qs = qs.filter( 
+
+        # SEARCH
+        query = self.request.GET.get("search")
+
+        if query:
+            qs = qs.filter(
                 Q(student__lastname__icontains=query) |
                 Q(student__firstname__icontains=query) |
                 Q(student__student_id__icontains=query) |
-                Q(organization__name__icontains=query) 
-                ) 
-        return qs 
+                Q(organization__name__icontains=query)
+            )
+        
+        sort_by = self.request.GET.get("sort_by")
+
+        if sort_by == "date_joined":
+            qs = qs.order_by("date_joined")
+        else:
+            qs = qs.order_by("student__lastname", "student__firstname")
+
+        return qs
 
 class OrgMemberCreate(CreateView):
     model = OrgMember
@@ -181,28 +196,36 @@ class CollegeDeleteView(DeleteView):
     success_url = reverse_lazy('college-list')
 
 class ProgramList(ListView):
+
     model = Program
-    context_object_name = "program" 
+    context_object_name = "program"
     template_name = "program_list.html"
-    paginate_by = 5    
+    paginate_by = 5
 
-    def get_ordering(self): 
-        allowed = ["prog_name", "college__college_name"] 
-        sort_by = self.request.GET.get("sort_by") 
-        if sort_by in allowed: 
-            return sort_by 
-        return "prog_name" 
+    def get_queryset(self):
 
-    def get_queryset(self):  
         qs = Program.objects.all()
-        query = self.request.GET.get('search') 
-     
-        if query: 
-            qs = qs.filter( 
+        
+        query = self.request.GET.get("search")
+
+        if query:
+            qs = qs.filter(
                 Q(prog_name__icontains=query) |
-                Q(college__college_name__icontains=query) 
-                ) 
-        return qs 
+                Q(college__college_name__icontains=query)
+            )
+
+        sort_by = self.request.GET.get("sort_by")
+
+        if sort_by == "college":
+            qs = qs.order_by("college__college_name")
+
+        elif sort_by == "prog_name":
+            qs = qs.order_by("prog_name")
+
+        else:
+            qs = qs.order_by("prog_name")
+
+        return qs
 
 class ProgramCreateView(CreateView):
     model = Program
