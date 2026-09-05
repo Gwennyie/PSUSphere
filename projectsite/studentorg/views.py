@@ -6,12 +6,8 @@ from studentorg.models import Organization, OrgMember, Student, College, Program
 from studentorg.forms import OrganizationForm, OrgMemberForm, StudentForm, CollegeForm, ProgramForm
 from django.urls import reverse_lazy
 
-from studentorg.forms import OrganizationForm, OrgMemberForm, StudentForm
-from django.urls import reverse_lazy 
-
-# Organization Views
 class HomePageView(ListView):
-    model = Organization, OrgMember, Student
+    model = Organization
     context_object_name = 'home'
     template_name = "home.html"
 
